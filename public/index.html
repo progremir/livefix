@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>livefix</title>
+  <link rel="stylesheet" href="/engine/style.css">
+</head>
+<body>
+  <div id="app">
+    <main id="stage">
+      <div id="frame">
+        <canvas id="game" width="960" height="540"></canvas>
+        <div id="caption" hidden></div>
+        <div id="toasts"></div>
+        <form id="typebox" hidden>
+          <label for="typeinput">What went wrong, or what should change?</label>
+          <input id="typeinput" autocomplete="off" placeholder="e.g. I fell through that platform">
+          <small>Enter to send · Esc to cancel · the game is paused while you type</small>
+        </form>
+        <div id="start" class="overlay">
+          <div class="card">
+            <h1>livefix</h1>
+            <p>Play. When something's off, <b>hold T and say it</b>. Claude reads what just happened in the game, fixes the code, and hot-swaps it in. You keep playing from right where you were.</p>
+            <div class="row">
+              <button id="startMic" class="primary">🎙 Play with mic</button>
+              <button id="startNoMic">Play without mic</button>
+            </div>
+            <p class="dim">Your voice, inputs, game events and state are all recorded on one clock under <code>sessions/</code>.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <aside id="hud">
+      <header>
+        <strong>livefix</strong>
+        <span id="ver" class="pill">v–</span>
+        <span id="conn" class="pill bad">offline</span>
+        <span id="mic" class="pill">mic off</span>
+      </header>
+      <section>
+        <h2>Fixer <span id="agentStatus" class="pill">idle</span></h2>
+        <ol id="agentLog"></ol>
+      </section>
+      <section class="grow">
+        <h2>Feedback &amp; fixes</h2>
+        <ol id="fixes"></ol>
+      </section>
+      <section>
+        <h2>Transcript</h2>
+        <ol id="transcript"></ol>
+      </section>
+      <footer>
+        <div class="keys">
+          <span><kbd>T</kbd> hold to talk</span>
+          <span><kbd>Enter</kbd> type feedback</span>
+          <span><kbd>⌫</kbd> rewind 5s</span>
+          <span><kbd>Esc</kbd> pause</span>
+        </div>
+        <label><input type="checkbox" id="handsFree"> hands-free (start with “hey game…”)</label>
+        <label><input type="checkbox" id="tts" checked> read fixes aloud</label>
+      </footer>
+    </aside>
+  </div>
+  <script type="module" src="/engine/main.js"></script>
+</body>
+</html>
